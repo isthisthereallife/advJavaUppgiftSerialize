@@ -11,18 +11,20 @@ public class App {
         List<Person> ppl = new ArrayList<>();
         List<Person> ppl2 = new ArrayList<>();
         addPplToList(ppl);
-        for(Person person : ppl){
-            Serializer.write(Paths.get(person.getName()),person);
+        for (Person person : ppl) {
+            Serializer.write(Paths.get(person.getName()), person);
             System.out.println("Serializing: " + person.toString());
         }
 
-        for (Person person : ppl){
+        for (Person person : ppl) {
             ppl2.add((Person) Serializer.read(Paths.get(person.getName())));
-            System.out.println("DeSerializing: " + person.toString());
+        }
+        for (Person person : ppl2) {
+            System.out.println("Deserialized: " + person.toString());
         }
     }
 
-    void addPplToList(List<Person> ppl){
+    void addPplToList(List<Person> ppl) {
         Person p = new Person("Jason");
         p.addPet(new Pet("Buddy"));
         p.addPet(new Pet("Spot"));
@@ -31,6 +33,7 @@ public class App {
         p2.addPet(new Pet("Pea"));
         p2.addPet(new Pet("Peat"));
         ppl.add(p2);
+        ppl.add(new Person("Steffe"));
     }
 
     public static App getInstance() {
