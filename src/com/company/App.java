@@ -11,17 +11,9 @@ public class App {
         List<Person> ppl = new ArrayList<>();
         List<Person> ppl2 = new ArrayList<>();
         addPplToList(ppl);
-        for (Person person : ppl) {
-            Serializer.write(Paths.get(person.getName()), person);
-            System.out.println("Serializing: " + person.toString());
-        }
-
-        for (Person person : ppl) {
-            ppl2.add((Person) Serializer.read(Paths.get(person.getName())));
-        }
-        for (Person person : ppl2) {
-            System.out.println("Deserialized: " + person.toString());
-        }
+        ppl.stream().forEach(p -> Serializer.write(Paths.get(p.getName()), p));
+        ppl.stream().forEach(p-> ppl2.add((Person) Serializer.read(Paths.get(p.getName()))));
+        ppl2.stream().forEach(p-> System.out.println("Deserialized: " + p.toString()));
     }
 
     void addPplToList(List<Person> ppl) {
